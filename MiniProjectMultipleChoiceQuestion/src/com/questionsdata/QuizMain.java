@@ -34,6 +34,7 @@ public class QuizMain {
 			} else {
 				System.out.println("Wrong answer\n");
 			}
+		}
 			if (countAns <= 10 && countAns > 8) {
 				System.out.println("Class A");
 				grade = "Class A ";
@@ -52,4 +53,4 @@ public class QuizMain {
 
 	}
 
-}
+
