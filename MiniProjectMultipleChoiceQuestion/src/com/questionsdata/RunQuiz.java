@@ -40,7 +40,7 @@ public class RunQuiz {
 								int y = Integer.parseInt(num1);
 								switch (y) {
 								case 1: {
-
+									int count = 0;
 									int stdId = 0;
 									String name = null;
 									String grade = null;
@@ -48,6 +48,14 @@ public class RunQuiz {
 
 									System.out.println("Enter your id Number");
 									stdId = sc.nextInt();
+									PreparedStatement pst1 = con.prepareStatement("Select student_id from result");
+									ResultSet rs1 = pst1.executeQuery();
+									while(rs1.next()) {
+										if(stdId == rs1.getInt(1)) {
+										count++;
+										}
+									}
+									if(count==0) {
 									System.out.println("Enter your name");
 									name = sc.next();
 									
@@ -70,8 +78,15 @@ public class RunQuiz {
 									pst.setString(4, grade);
 
 									pst.execute();
-								}
 									break;
+									}
+									else
+									{
+										System.out.println("Id number = "+stdId+" is already attempted quiz....Please enter a New Student ID..\n");
+										
+									}
+								}
+							
 
 								case 2:
 									break l;
@@ -142,20 +157,29 @@ public class RunQuiz {
 
 								case 1:
 									System.out.println("Enter Student id ");
+									int count = 0;
 									int id = sc.nextInt();
 									PreparedStatement pst2 = con
 											.prepareStatement("Select * from result where student_id = ?");
 									pst2.setInt(1, id);
 									ResultSet rs = pst2.executeQuery();
-
+									while(rs.next()) {
+										if(id==rs.getInt(1)) {
+											count++;
+										}
+									}
+									if(count>0) {
 									while (rs.next()) {
 
 										System.out.print("Id = " + rs.getInt(1));
 										System.out.print("\t Name = " + rs.getString(2));
 										System.out.print("\t Score = " + rs.getString(3));
 										System.out.print("\t Grade = " + rs.getString(4));
+										}
 									}
-
+									else {
+										System.out.println("There is no user of Id number "+id+". You have entered wrong ID");
+									}
 									System.out.println("\n\n");
 									break;
 
