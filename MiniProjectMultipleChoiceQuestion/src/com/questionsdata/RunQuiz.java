@@ -157,18 +157,12 @@ public class RunQuiz {
 
 								case 1:
 									System.out.println("Enter Student id ");
-									int count = 0;
 									int id = sc.nextInt();
 									PreparedStatement pst2 = con
 											.prepareStatement("Select * from result where student_id = ?");
 									pst2.setInt(1, id);
 									ResultSet rs = pst2.executeQuery();
-									while(rs.next()) {
-										if(id==rs.getInt(1)) {
-											count++;
-										}
-									}
-									if(count>0) {
+								
 									while (rs.next()) {
 
 										System.out.print("Id = " + rs.getInt(1));
@@ -176,10 +170,7 @@ public class RunQuiz {
 										System.out.print("\t Score = " + rs.getString(3));
 										System.out.print("\t Grade = " + rs.getString(4));
 										}
-									}
-									else {
-										System.out.println("There is no user of Id number "+id+". You have entered wrong ID");
-									}
+								
 									System.out.println("\n\n");
 									break;
 
